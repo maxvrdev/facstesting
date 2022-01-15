@@ -1,0 +1,85 @@
+<?php
+
+namespace Tests\Feature;
+
+use Tests\TestCase;
+use App\Model\{{modelName}};
+
+class {{modelName}}Test extends TestCase
+{
+
+    /** @var {{modelName}} */
+    protected ${{modelNameSingularLowerCase}};
+
+    /**
+     * Set up test case
+     *
+     * @return void
+     */
+    public function setUp() : void
+    {
+        parent::setUp();
+
+        $this->{{modelNameSingularLowerCase}} = {{modelName}}::factory()->make();
+    }
+
+    /**
+     * List all {{modelNamePluralLowerCase}}
+     *
+     * @return void
+     */
+    public function testIndex() : void
+    {
+        $this->getJson('/api/{{modelNameSingularLowerCase}}')
+            ->assertSuccessful();
+    }
+
+    /**
+     * Show {{modelNameSingularLowerCase}}
+     *
+     * @return void
+     */
+    public function testShow() : void
+    {
+        $this->getJson('/api/{{modelNameSingularLowerCase}}/1')
+            ->assertSuccessful();
+
+        $this->getJson('/api/{{modelNameSingularLowerCase}}/0')
+            ->assertNotFound();
+    }
+
+    /**
+     * Create new {{modelNameSingularLowerCase}}
+     *
+     * @return void
+     */
+    public function testStore() : void
+    {
+        $this->postJson('/api/{{modelNameSingularLowerCase}}', $this->{{modelNameSingularLowerCase}}->toArray())
+            ->assertSuccessful();
+    }
+
+    /**
+     * Edit {{modelNameSingularLowerCase}}
+     *
+     * @return void
+     */
+    public function testUpdate() : void
+    {
+        $this->patchJson('/api/{{modelNameSingularLowerCase}}/1', $this->{{modelNameSingularLowerCase}}->toArray())
+            ->assertSuccessful();
+    }
+
+    /**
+     * Delete {{modelNameSingularLowerCase}}
+     *
+     * @return void
+     */
+    public function testDestroy() : void
+    {
+        $id = {{modelName}}::all()->last()->id;
+
+        $this->deleteJson('/api/{{modelNameSingularLowerCase}}/'.$id)
+            ->assertSuccessful();
+    }
+}
